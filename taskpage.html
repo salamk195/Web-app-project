@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, rgb(41, 20, 20), #a0532f);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        input::placeholder {
+            color: #a0532f;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 900px;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            color: brown;
+        }
+        form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            border: 2px solid brown;
+            border-radius: 35px;
+            font-size: 16px;
+        }
+        #new-task {
+            width: 65%;
+        }
+        #task-time {
+            width: 25%;
+        }
+        button {
+            width: 25%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 35px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: brown;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        li:nth-child(odd) {
+            background-color: #eee;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .loading-spinner {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid brown;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="todo-form">
+            <input type="text" id="new-task" placeholder="Add a new task..." required>
+            <input type="datetime-local" id="task-time" placeholder="Time of task" required>
+            <button type="submit">Add</button>
+        </form>
+        <div class="loading-spinner" id="loading-spinner"></div>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+        document.getElementById('todo-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const taskText = document.getElementById('new-task').value;
+            const taskTime = document.getElementById('task-time').value;
+
+            if (taskText === '' || taskTime === '') {
+                return;
+            }
+
+            // Show loading spinner
+            const spinner = document.getElementById('loading-spinner');
+            spinner.style.display = 'block';
+
+            // Hide form during loading
+            document.getElementById('todo-form').style.display = 'none';
+
+            // Add task after 4 seconds
+            setTimeout(() => {
+                // Format the date and time properly
+                const formattedTime = new Date(taskTime).toLocaleString('en-US', {
+                    dateStyle: 'short',
+                    timeStyle: 'short',
+                });
+
+                const li = document.createElement('li');
+                li.textContent = `${taskText} - ${formattedTime}`;
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'delete-btn';
+
+                deleteBtn.addEventListener('click', function() {
+                    this.parentElement.remove();
+                });
+
+                li.appendChild(deleteBtn);
+
+                document.getElementById('todo-list').appendChild(li);
+
+                // Hide loading spinner and show form again
+                spinner.style.display = 'none';
+                document.getElementById('todo-form').style.display = 'flex';
+
+                // Clear input fields
+                document.getElementById('new-task').value = '';
+                document.getElementById('task-time').value = '';
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
