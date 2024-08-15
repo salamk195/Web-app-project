@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>To-Do List (Created by Abdulsalam and Eyole)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,7 +45,7 @@
             width: 65%;
         }
         #task-time {
-            width: 25%;
+            width: 30%;
         }
         button {
             width: 25%;
@@ -105,6 +105,10 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        h3 {
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -112,9 +116,10 @@
         <h1>To-Do List</h1>
         <form id="todo-form">
             <input type="text" id="new-task" placeholder="Add a new task..." required>
-            <input type="datetime-local" id="task-time" placeholder="Time of task" required>
+            <input type="datetime-local" id="task-time" required>
             <button type="submit">Add</button>
         </form>
+        <h3>(Created by Abdulsalam and Eyole)</h3>
         <div class="loading-spinner" id="loading-spinner"></div>
         <ul id="todo-list"></ul>
     </div>
@@ -126,7 +131,8 @@
             const taskText = document.getElementById('new-task').value;
             const taskTime = document.getElementById('task-time').value;
 
-            if (taskText === '' || taskTime === '') {
+            if (!taskText || !taskTime) {
+                alert('Please fill in both fields.');
                 return;
             }
 
