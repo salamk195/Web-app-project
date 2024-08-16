@@ -10,9 +10,48 @@
         background-repeat: no-repeat;
         background-size: cover;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
         font-family: Arial, sans-serif;
+        color: white;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 15px 0;
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 14px 20px;
+        font-size: 1.2rem;
+        margin: 0 15px;
+        transition: background-color 0.3s ease;
+      }
+
+      .navbar a:hover {
+        background-color: brown;
+        border-radius: 10px;
+      }
+
+      .container {
+        text-align: center;
+        margin-top: 80px; /* Adjust to prevent overlap with navbar */
+      }
+
+      .welcome-text {
+        font-size: 3rem;
+        color: brown;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       }
 
       .form {
@@ -23,7 +62,7 @@
         border-radius: 15px;
         border: solid 2px brown;
         backdrop-filter: blur(10px);
-        box-shadow: 0px 0px 1000px rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
         text-align: center;
       }
 
@@ -71,6 +110,10 @@
         margin-top: 10px;
       }
 
+      button:hover {
+        background-color: darkbrown;
+      }
+
       .yop {
         display: flex;
         justify-content: center;
@@ -90,22 +133,27 @@
         text-decoration: none;
         margin-top: 15px;
       }
-      .button{
-         margin-top: 10px;
-      }
     </style>
   </head>
   <body>
-   <form action="taskpage.html" method="get">
-    <div class="form">
-      <h1>Login</h1>
-      <input type="text" placeholder="Email or phone" required>
-      <input class="sec" type="password" placeholder="Password" required>
-      <a href="#">Forgot Password?</a>
-      <button><a class="button">Login</a></button>
-      <div class="yop">
-        <h3>Not a member?</h3>
-        <a href="#" class="ank">Signup now</a>
+    <div class="navbar">
+      <a href="#">Home</a>
+      <a href="#">Contact Me</a>
+      <a href="#">More</a>
+    </div>
+
+    <div class="container">
+      <div class="welcome-text">Welcome to Our Web App</div>
+      <div class="form">
+        <h1>Login</h1>
+        <input type="text" placeholder="Email or phone" required>
+        <input class="sec" type="password" placeholder="Password" required>
+        <a href="#">Forgot Password?</a>
+        <button>Login</button>
+        <div class="yop">
+          <h3>Not a member?</h3>
+          <a href="#" class="ank">Signup now</a>
+        </div>
       </div>
     </div>
   </body>
